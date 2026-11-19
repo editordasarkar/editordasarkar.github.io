@@ -1,0 +1,5 @@
+# Local tools and system files
+.claude/
+.DS_Store
+# Backup model (not used by the site)
+assets/character-bust.glb

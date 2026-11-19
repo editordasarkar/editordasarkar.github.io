@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Harshkumar Puthran — Video Editor</title>
+  <meta name="description" content="Harshkumar Puthran — video editor, creative strategist and designer based in Bangalore." />
+  <meta name="theme-color" content="#07060b" />
+  <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=79" />
+  <script type="importmap">
+    { "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+    } }
+  </script>
+</head>
+<body>
+  <!-- Loader -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="ld-top"><img class="logo-mark ld-logo" src="assets/logo.png" alt="" width="54" height="35" /><span class="mono">Loading timeline…</span></div>
+    <div class="ld-count" id="ld-count">000</div>
+    <div class="ld-bar"><i id="ld-bar"></i></div>
+    <div class="ld-bottom mono"><span id="ld-name"></span><span>Video Editor</span></div>
+  </div>
+
+  <!-- Background + 3D -->
+  <div class="bg" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div>
+  <canvas id="scene" aria-hidden="true"></canvas>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+
+  <!-- Cursor -->
+  <div class="cursor" id="cursor" aria-hidden="true"><span id="cursor-label"></span></div>
+  <div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
+  <div class="hover-thumb" id="hover-thumb" aria-hidden="true"></div>
+
+  <!-- Header + HUD -->
+  <header class="topbar">
+    <a href="#top" class="brand" data-cursor="Top">
+      <img class="logo-mark" src="assets/logo.png" alt="HP logo" width="54" height="35" />
+      <span class="brand-txt"><strong id="brand-name"></strong><small id="brand-title"></small></span>
+    </a>
+    <nav class="nav">
+      <a href="#resume" data-cursor="Go">Résumé</a>
+      <a href="#works" data-cursor="Go">Works</a>
+      <a href="#contact" data-cursor="Go">Contact</a>
+    </nav>
+    <a href="#contact" class="status"><i></i>Available for projects</a>
+  </header>
+
+  <div class="hud mono" aria-hidden="true">
+    <span class="hud-tc"><i class="rec"></i><span id="tc">00:00:00:00</span></span>
+    <span class="hud-scrub"><i id="scrub-bar"></i></span>
+    <span class="hud-scene" id="hud-scene">SC 01 — INTRO</span>
+  </div>
+
+  <main id="top">
+    <!-- 01 HERO -->
+    <section class="hero" data-scene="Intro">
+      <p class="eyebrow mono z"><span>Video Editor</span><span>Creative Strategist</span><span>Designer</span></p>
+      <h1 class="hero-name">
+        <span class="line"><span id="hero-first">Harshkumar</span></span>
+        <span class="line it"><span id="hero-last">Puthran</span></span>
+      </h1>
+      <div class="hero-foot z">
+        <p class="hero-bio" id="hero-bio"></p>
+        <div class="hero-cta">
+          <button class="btn-play" id="showreel-btn" data-cursor="Play" hidden>
+            <span class="pp"><i></i></span><span>Play showreel</span>
+          </button>
+          <span class="scroll-cue mono"><i></i>Scroll</span>
+        </div>
+        <p class="hero-loc mono" id="hero-loc"></p>
+      </div>
+    </section>
+
+    <!-- 02 STATEMENT + STATS -->
+    <section class="intro" data-scene="About">
+      <div class="intro-sticky">
+        <div class="intro-copy z">
+          <p class="label mono">(01) — About</p>
+          <p class="statement" id="statement"></p>
+          <div class="stats" id="stats"></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="marquee z" aria-hidden="true"><div class="track" id="marquee"></div></div>
+
+    <!-- 03 RÉSUMÉ -->
+    <section class="resume z" id="resume" data-scene="Résumé">
+      <div class="sec-head">
+        <p class="label mono">(02) — Résumé</p>
+        <h2 class="h2 split">The <em>timeline</em> so far</h2>
+        <a class="btn-ghost" id="resume-link" target="_blank" rel="noopener" data-cursor="Open" hidden>Download PDF ↗</a>
+      </div>
+      <ol class="timeline" id="timeline"></ol>
+      <p class="early-edu mono" id="early-edu"></p>
+      <div class="skills" id="skills"></div>
+    </section>
+
+    <!-- 04 WORKS -->
+    <section class="works" id="works" data-scene="Works">
+      <aside class="works-aside z">
+        <p class="label mono">(03) — Works</p>
+        <h2 class="h2 big">Selected<br /><em>works</em></h2>
+        <p class="works-hint mono"><span id="works-count"></span> · Hover to preview · Click to play</p>
+      </aside>
+      <div class="works-list z" id="works-list"></div>
+    </section>
+
+    <!-- 05 RECOGNITION -->
+    <section class="recognition z" id="recognition" data-scene="Awards">
+      <div class="sec-head">
+        <p class="label mono">(04) — Recognition</p>
+        <h2 class="h2 split">Recognised by <em>all three</em></h2>
+      </div>
+      <div class="rec-grid" id="rec-grid"></div>
+      <div class="volunteer reveal">
+        <p class="label mono">Volunteer &amp; community</p>
+        <ul id="volunteer"></ul>
+      </div>
+    </section>
+
+    <!-- 06 CONTACT -->
+    <section class="contact z" id="contact" data-scene="Contact">
+      <img class="avatar reveal" id="avatar" alt="" />
+      <p class="label mono reveal">(05) — Contact</p>
+      <h2 class="contact-title split">Let's create something <em>extraordinary</em></h2>
+      <p class="contact-sub reveal">Open to new opportunities, creative projects and meaningful collaborations.</p>
+      <a class="btn-mail reveal" id="contact-mail" data-cursor="Write"></a>
+      <div class="contact-meta mono reveal" id="contact-meta"></div>
+      <footer class="foot mono">
+        <span id="foot-name"></span>
+        <span>Edited, graded &amp; exported with care</span>
+        <a href="#top" data-cursor="Top">Back to top ↑</a>
+      </footer>
+    </section>
+  </main>
+
+  <!-- Video popup -->
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Video player" hidden>
+    <div class="modal-inner" id="modal-inner">
+      <div class="modal-bar mono">
+        <span id="modal-title"></span>
+        <span class="modal-actions">
+          <a id="modal-open" target="_blank" rel="noopener">Open original ↗</a>
+          <button class="modal-close" id="modal-close" aria-label="Close video">Close ✕</button>
+        </span>
+      </div>
+      <div class="modal-frame" id="modal-frame"></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+  <script src="data.js?v=79"></script>
+  <script src="script.js?v=79"></script>
+  <script type="module" src="scene.js?v=79"></script>
+</body>
+</html>
