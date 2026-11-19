@@ -154,6 +154,25 @@ const WORKS = [
   },
   {
     number: "05",
+    title: "3D Visualisation",
+    subtitle: "Interior Design · SketchUp Modelling · Photoreal Renders",
+    role: "SketchUp · 3D Modelling · Lighting & Rendering",
+    award: "",
+    projects: [
+      { title: "Executive Office — Interior Render", type: "SketchUp · 3D Render", year: "", thumbnail: "assets/thumbs/sketchup-office.jpg",
+        link: "https://drive.google.com/drive/folders/12EMrXEH8zYQlwCNPJ6t_h_gadUZqGrv6?usp=drive_link",
+        ratio: "16 / 9",
+        images: [
+          "1WdxSfvHMJ9GuvAgeuYCaCcZiRF65nFKM",
+          "1Od5yAcW2huLByOI86Xi-x5vaE-LpVgYa",
+          "1QqvmHHdCrEpX14UAEGXRFEMmrtQs7aFE",
+          "1VwDb1kbaRmciPI9OR9hNImP6qBi-J4Yp",
+          "1staTx7DQ0Ss36zmBPMDx8Wy1DKuUdd6a",
+        ] },
+    ],
+  },
+  {
+    number: "06",
     title: "AI Projects & Campaigns",
     subtitle: "AI Films · Generative Visuals · AI-Driven Campaigns",
     role: "Midjourney · ElevenLabs · Suno · Google Flow · Seedance",

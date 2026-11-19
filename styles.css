@@ -458,3 +458,10 @@ body.cursor-on .cursor, body.cursor-on .cursor-dot { opacity: 1; }
 @keyframes soonPulse { 0% { box-shadow: 0 0 0 0 rgba(167,139,250,.6); } 100% { box-shadow: 0 0 0 12px rgba(167,139,250,0); } }
 @keyframes soonSweep { 0% { transform: translateX(-100%); } 60%, 100% { transform: translateX(100%); } }
 @media (prefers-reduced-motion: reduce) { .soon-panel::after, .soon-dot { animation: none; } }
+.g-slide.wide { height: auto; width: min(88%, 980px, calc(68vh * 16 / 9)); }
+@media (max-width: 700px) { .g-slide.wide { width: 86vw; } }
+
+/* While a video / carousel popup is open, use the normal system cursor */
+body.modal-open .cursor, body.modal-open .cursor-dot { display: none !important; }
+body.has-cursor.modal-open, body.has-cursor.modal-open .modal { cursor: auto; }
+body.has-cursor.modal-open a, body.has-cursor.modal-open button { cursor: pointer; }

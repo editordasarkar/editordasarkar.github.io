@@ -301,6 +301,8 @@
     document.body.classList.add("has-cursor");
     const cur = $("#cursor"), dot = $("#cursor-dot"), lab = $("#cursor-label");
     addEventListener("pointermove", (e) => { document.body.classList.add("cursor-on"); mx = e.clientX; my = e.clientY; dot.style.transform = `translate3d(${mx}px,${my}px,0)`; }, { passive: true });
+    // hide the custom cursor when the mouse leaves the window (or goes into a video frame)
+    document.addEventListener("mouseout", (e) => { if (!e.relatedTarget) document.body.classList.remove("cursor-on"); });
     document.addEventListener("mouseover", (e) => {
       const t = e.target.closest("[data-cursor]");
       cur.classList.toggle("big", !!t);
@@ -352,6 +354,7 @@
     $("#modal-title").textContent = p.title;
     $("#modal-open").href = info.url;
     modal.hidden = false;
+    document.body.classList.add("modal-open");
     hover.classList.remove("on");
     if (lenis) lenis.stop();
     document.body.style.overflow = "hidden";
@@ -365,7 +368,11 @@
     const track = el("div", "g-track");
     p.images.forEach((x, i) => {
       const fig = el("figure", "g-slide");
-      if (p.ratio) fig.style.aspectRatio = p.ratio;
+      if (p.ratio) {
+        fig.style.aspectRatio = p.ratio;
+        const [w, h] = String(p.ratio).split("/").map(Number);
+        if (w > h) { fig.classList.add("wide"); } // landscape renders: size by width, not height
+      }
       const img = el("img");
       img.src = slideSrc(x);
       img.alt = `${p.title} — slide ${i + 1}`;
@@ -412,6 +419,7 @@
     const info = parseLink(p.link);
     $("#modal-open").href = info ? info.url : slideSrc(p.images[0]);
     modal.hidden = false;
+    document.body.classList.add("modal-open");
     hover.classList.remove("on");
     if (lenis) lenis.stop();
     document.body.style.overflow = "hidden";
@@ -426,6 +434,8 @@
 
   function closeVideo() {
     modal.hidden = true;
+    document.body.classList.remove("modal-open");
+    const c = $("#cursor"); if (c) c.classList.remove("big");
     frame.innerHTML = "";
     frame.classList.remove("gallery");
     inner.classList.remove("is-gallery");
