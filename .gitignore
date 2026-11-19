@@ -3,3 +3,5 @@
 .DS_Store
 # Backup model (not used by the site)
 assets/character-bust.glb
+# GitHub CLI used for publishing (not part of the site)
+.tools/
