@@ -229,12 +229,6 @@ const PROFILE = {
 
 const RESUME = [
   {
-    years: "2020 – 2023",
-    org: "Prahladrai Dalmia Lions College of Commerce & Economics",
-    role: "B.A. in Multimedia & Mass Communication",
-    details: ["Social Media Department — volunteer", "Multiple certificates for college events (Media Mantra, intercollegiate conferences & more)"],
-  },
-  {
     years: "2023 – 2024",
     org: "Cricbaby",
     role: "Graphic Designer",
@@ -260,9 +254,29 @@ const RESUME = [
   },
 ];
 
-const EARLY_EDUCATION = [
-  "HSC — St. Peter's College of Science and Commerce (2018 – 2020)",
-  "SSC — Carmelite Convent English High School (2006 – 2018)",
+// Education — shown as its own timeline under work experience (newest first).
+const EDUCATION = [
+  {
+    years: "2020 – 2023",
+    org: "Prahladrai Dalmia Lions College of Commerce & Economics",
+    role: "B.A. in Multimedia & Mass Communication",
+    tag: "Degree",
+    details: ["Social Media Department — volunteer", "Multiple certificates for college events (Media Mantra, intercollegiate conferences & more)", "Created the concept brand The Shoe Factory — identity, print campaign & ad storyboard"],
+  },
+  {
+    years: "2018 – 2020",
+    org: "St. Peter's College of Science and Commerce",
+    role: "HSC — Higher Secondary Certificate",
+    tag: "Higher Secondary",
+    details: [],
+  },
+  {
+    years: "2006 – 2018",
+    org: "Carmelite Convent English High School",
+    role: "SSC — Secondary School Certificate",
+    tag: "School",
+    details: [],
+  },
 ];
 
 const SKILLS = [

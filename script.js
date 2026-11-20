@@ -103,18 +103,22 @@
   const mq = PROFILE.marquee || [];
   [...mq, ...mq].forEach((t) => $("#marquee").append(el("span", "", t)));
 
-  // résumé
-  RESUME.slice().reverse().forEach((r, i, arr) => {
-    const li = el("li", "tl-item reveal" + (/now|current/i.test(r.years) ? " now" : ""));
-    li.style.setProperty("--d", i * 70 + "ms");
-    const org = el("div");
-    org.append(el("div", "tl-org", r.org), el("span", "tl-role", r.role));
-    const ul = el("ul", "tl-details");
-    r.details.forEach((d) => ul.append(el("li", "", d)));
-    li.append(el("div", "tl-years", r.years), org, ul, el("div", "tl-idx", String(arr.length - i).padStart(2, "0")));
-    $("#timeline").append(li);
-  });
-  $("#early-edu").textContent = "Education — B.A. (MMC) 2020 – 2023  ·  " + EARLY_EDUCATION.join("  ·  ");
+  // résumé — work experience, then education, as matching timelines
+  function timeline(list, target, opts = {}) {
+    list.forEach((r, i, arr) => {
+      const li = el("li", "tl-item reveal" + (/now|current/i.test(r.years) ? " now" : "") + (opts.cls ? " " + opts.cls : ""));
+      li.style.setProperty("--d", i * 70 + "ms");
+      const org = el("div");
+      if (r.tag) org.append(el("span", "tl-tag mono", r.tag));
+      org.append(el("div", "tl-org", r.org), el("span", "tl-role", r.role));
+      const ul = el("ul", "tl-details");
+      (r.details || []).forEach((d) => ul.append(el("li", "", d)));
+      li.append(el("div", "tl-years", r.years), org, ul, el("div", "tl-idx", String(opts.reverse ? arr.length - i : i + 1).padStart(2, "0")));
+      $(target).append(li);
+    });
+  }
+  timeline(RESUME.slice().reverse(), "#timeline", { reverse: true });
+  if (typeof EDUCATION !== "undefined") timeline(EDUCATION, "#edu-timeline", { cls: "edu" });
 
   SKILLS.forEach((g, gi) => {
     const box = el("div", "skill-box reveal");
