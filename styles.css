@@ -473,3 +473,17 @@ body.has-cursor.modal-open a, body.has-cursor.modal-open button { cursor: pointe
 .tl-head em { font-family: var(--serif); font-style: italic; font-weight: 400; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; padding-right: .06em; }
 .tl-tag { display: inline-block; margin-bottom: 10px; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--v3);
   padding: 4px 10px; border-radius: 999px; border: 1px solid rgba(167,139,250,.3); background: rgba(139,92,246,.08); }
+
+/* Four-link top bar: on phones show the logo only, so every link fits */
+@media (max-width: 620px) {
+  .topbar { gap: 8px; }
+  .topbar .brand-txt { display: none; }
+  .nav { justify-self: end; gap: 0; padding: 4px; }
+  .nav a { padding: 8px 10px; }
+}
+@media (max-width: 370px) {
+  .topbar .logo-mark { height: 23px; }
+  .nav a { padding: 8px 6px; font-size: 11px; }
+}
+@media (min-width: 901px) { .topbar { column-gap: 24px; } }
+@media (min-width: 901px) and (max-width: 1200px) { .topbar .brand-txt small { display: none; } }
